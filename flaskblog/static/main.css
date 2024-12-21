@@ -1,80 +1,148 @@
+/* Base Styles */
 body {
-  background: #fafafa;
-  color: #333333;
+  background: #f7f7f7; /* Light gray for a clean look */
+  color: #2b2b2b; /* Darker gray for text readability */
   margin-top: 5rem;
+  font-family: Arial, sans-serif; /* Modern, clean font */
 }
 
+/* Headings */
 h1, h2, h3, h4, h5, h6 {
-  color: #444444;
+  color: #d80027; /* SEW red for headings */
+  font-weight: bold;
 }
 
-.bg-steel {
-  background-color: #5f788a;
+/* Navbar and Header */
+.site-header {
+  background-color: #d80027; /* SEW red for the header */
+  padding: 10px 0; /* Slightly thicker padding */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+}
+
+.navbar {
+  background-color: transparent; /* Inherit header background */
+}
+
+.navbar-brand {
+  color: #ffffff; /* White branding text */
+  font-size: 1.5rem; /* Larger font for emphasis */
+  font-weight: bold;
+}
+
+.navbar-brand:hover {
+  color: #ffcccc; /* Light red hover effect */
 }
 
 .site-header .navbar-nav .nav-link {
-  color: #cbd5db;
+  color: #ffffff; /* White for contrast against red */
+  font-size: 1.1rem; /* Slightly larger for modern look */
+  margin-right: 15px; /* Spacing between links */
+  text-transform: uppercase; /* Clean and professional */
 }
 
 .site-header .navbar-nav .nav-link:hover {
-  color: #ffffff;
+  color: #ffcccc; /* Light red on hover */
 }
 
 .site-header .navbar-nav .nav-link.active {
-  font-weight: 500;
+  font-weight: bold;
+  border-bottom: 2px solid #ffffff; /* Underline for active links */
 }
 
+.navbar-toggler {
+  border-color: #ffffff; /* White border for toggle button */
+}
+
+.navbar-toggler-icon {
+  background-color: #ffffff; /* White toggle icon */
+}
+
+/* Content Section */
 .content-section {
   background: #ffffff;
-  padding: 10px 20px;
-  border: 1px solid #dddddd;
-  border-radius: 3px;
+  padding: 15px 25px;
+  border: 1px solid #eeeeee;
+  border-radius: 6px; /* Rounded corners for a modern feel */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
   margin-bottom: 20px;
 }
 
+/* Articles */
 .article-title {
-  color: #444444;
+  color: #d80027; /* Highlighted in red for branding */
+  font-weight: bold;
 }
 
 a.article-title:hover {
-  color: #428bca;
-  text-decoration: none;
+  color: #99001a; /* Darker red for hover effect */
+  text-decoration: underline; /* Subtle hover effect */
 }
 
 .article-content {
   white-space: pre-line;
+  line-height: 1.6; /* Improved readability */
 }
 
 .article-img {
-  height: 65px;
-  width: 65px;
-  margin-right: 16px;
+  height: 80px; /* Larger images for visual appeal */
+  width: 80px;
+  margin-right: 20px;
+  border-radius: 5px; /* Rounded edges for a modern look */
 }
 
 .article-metadata {
-  padding-bottom: 1px;
-  margin-bottom: 4px;
-  border-bottom: 1px solid #e3e3e3
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #d80027; /* Red line for branding */
 }
 
 .article-metadata a:hover {
-  color: #333;
-  text-decoration: none;
+  color: #d80027;
+  text-decoration: underline;
 }
 
 .article-svg {
-  width: 25px;
-  height: 25px;
+  width: 30px; /* Slightly larger icons */
+  height: 30px;
   vertical-align: middle;
+  fill: #d80027; /* Icon color matching branding */
 }
 
+/* Account Section */
 .account-img {
-  height: 125px;
-  width: 125px;
+  height: 150px;
+  width: 150px;
   margin-right: 20px;
   margin-bottom: 16px;
+  border-radius: 50%; /* Circular profile pictures */
+  border: 3px solid #d80027; /* Red border for branding */
 }
 
 .account-heading {
-  font-size: 2.5rem;
+  font-size: 2.8rem; /* Larger for emphasis */
+  color: #d80027; /* Red for branding */
+  font-weight: bold;
+}
+
+/* Footer */
+footer {
+  background-color: #333333; /* Dark footer for contrast */
+  color: #ffffff;
+  padding: 20px 0;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+footer a {
+  color: #d80027;
+}
+
+footer a:hover {
+  color: #ffcccc;
+  text-decoration: underline;
+}
+
+/* Fixed Navbar Padding */
+body {
+  padding-top: 70px; /* Prevent overlap with fixed navbar */
 }
