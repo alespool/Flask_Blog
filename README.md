@@ -2,6 +2,11 @@
 
 A simple yet powerful blogging application built using Flask, a lightweight Python web framework. This project demonstrates how to create a blog with user authentication, post creation, and content management.
 
+#### TODO: 
+- add type hints and annotations to code; 
+- modify HTML and CSS layout for more modern look;
+- add info in About, Latest Posts, Announcements etc pages;
+
 ---
 
 ## Features
