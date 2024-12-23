@@ -8,7 +8,7 @@ body {
 
 /* Headings */
 h1, h2, h3, h4, h5, h6 {
-  color: #d80027; /* Red for headings */
+  color: #d80027; /* SEW red for headings */
   font-weight: bold;
 }
 
@@ -55,7 +55,7 @@ body {
 
 /* Navbar and Header */
 .site-header {
-  background-color: #d80027; /* Red for the header */
+  background-color: #d80027; /* SEW red for the header */
   padding: 10px 0; /* Slightly thicker padding */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
 }

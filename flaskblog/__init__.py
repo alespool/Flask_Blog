@@ -4,7 +4,7 @@ from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from flask_mail import Mail
 from flaskblog.config import Config
-
+from flask_pagedown import PageDown
 
 db = SQLAlchemy()
 bcrypt = Bcrypt()
@@ -37,6 +37,8 @@ mail = Mail()
 def create_app(config_class=Config):
     
     app = Flask(__name__)
+    pagedown = PageDown(app)
+    
     app.config.from_object(Config)
 
     db.init_app(app)
