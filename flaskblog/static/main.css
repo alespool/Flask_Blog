@@ -2,7 +2,7 @@
 body {
   background: #f7f7f7; /* Light gray for a clean look */
   color: #2b2b2b; /* Darker gray for text readability */
-  margin-top: 5rem;
+  margin-top: 0rem;
   font-family: Arial, sans-serif; /* Modern, clean font */
 }
 
@@ -49,7 +49,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Navbar Offset */
 body {
-  padding-top: 70px; /* Prevent content from overlapping navbar */
+  padding-top: 0px; /* Prevent content from overlapping navbar */
 }
 
 
@@ -181,9 +181,4 @@ footer a {
 footer a:hover {
   color: #ffcccc;
   text-decoration: underline;
-}
-
-/* Fixed Navbar Padding */
-body {
-  padding-top: 70px; /* Prevent overlap with fixed navbar */
 }

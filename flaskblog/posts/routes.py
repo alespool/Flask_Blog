@@ -79,3 +79,10 @@ def delete_post(post_id):
     db.session.commit()
     flash('Your post has been deleted!', 'success')
     return redirect(url_for('main.home'))
+
+@posts.route('/about')
+def about():
+    # Fetch recent posts from your database or CMS
+    recent_posts = Post.query.order_by(Post.date_posted.desc()).limit(3).all()  # Adjust query as needed
+    return render_template('about.html', recent_posts=recent_posts)
+

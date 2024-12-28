@@ -90,9 +90,14 @@ class Post(db.Model):
     """
     id: int = db.Column(db.Integer, primary_key=True)
     title: str = db.Column(db.String(100), nullable=False)
-    date_posted: datetime = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    date_posted: datetime = db.Column(db.DateTime, nullable=False, default=datetime.now)
     content: str = db.Column(db.Text, nullable=False)
     user_id: int = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    #is_announcements: bool = db.Column(db.Boolean, default=False)
+
+    def excerpt(self, length=200):
+        # Return the first 'length' characters of the post content
+        return self.content[:length] + "..." if len(self.content) > length else self.content
 
     def __repr__(self) -> str:
         """
