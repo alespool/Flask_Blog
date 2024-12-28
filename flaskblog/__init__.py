@@ -14,6 +14,41 @@ login_manager.login_message_category = 'info'
 
 mail = Mail()
 
+
+def create_app(config_class: type[Config] = Config) -> Flask:
+    """
+    Factory function to create and configure the Flask application.
+
+    Args:
+        config_class (type[Config], optional): The configuration class for the app. Defaults to Config.
+
+    Returns:
+        Flask: The configured Flask application instance.
+    """
+    app = Flask(__name__)
+    pagedown = PageDown(app)
+    
+    app.config.from_object(Config)
+
+    # Initialize extensions
+    db.init_app(app)
+    bcrypt.init_app(app)
+    login_manager.init_app(app)
+    mail.init_app(app)
+
+    # Register blueprints
+    from flaskblog.users.routes import users
+    from flaskblog.posts.routes import posts
+    from flaskblog.main.routes import main
+    from flaskblog.errors.handlers import errors
+
+    app.register_blueprint(users)
+    app.register_blueprint(posts)
+    app.register_blueprint(main)
+    app.register_blueprint(errors)
+
+    return app
+
 # from authlib.integrations.flask_client import OAuth
 
 # OAuth Configurations
@@ -32,28 +67,3 @@ mail = Mail()
 #         'scope': 'email profile',
 #     },
 # )
-
-
-def create_app(config_class=Config):
-    
-    app = Flask(__name__)
-    pagedown = PageDown(app)
-    
-    app.config.from_object(Config)
-
-    db.init_app(app)
-    bcrypt.init_app(app)
-    login_manager.init_app(app)
-    mail.init_app(app)
-
-    from flaskblog.users.routes import users
-    from flaskblog.posts.routes import posts
-    from flaskblog.main.routes import main
-    from flaskblog.errors.handlers import errors
-
-    app.register_blueprint(users)
-    app.register_blueprint(posts)
-    app.register_blueprint(main)
-    app.register_blueprint(errors)
-
-    return app

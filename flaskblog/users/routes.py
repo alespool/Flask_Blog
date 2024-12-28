@@ -9,7 +9,13 @@ from flaskblog.users.utils import save_picture, send_reset_email
 users = Blueprint('users', __name__)
 
 @users.route("/register", methods=['GET', 'POST'])
-def register():
+def register() -> str:
+    """
+    Handles user registration.
+
+    Returns:
+        str: The rendered registration page or a redirection to the login page after successful registration.
+    """
     if current_user.is_authenticated:
         return redirect(url_for('main.main.home'))
     form = RegistrationForm()
@@ -22,8 +28,14 @@ def register():
         return redirect(url_for('users.login'))
     return render_template('register.html', title='Register', form=form)
 
-@users.route("/login", methods=['GET','POST'])
-def login():
+@users.route("/login", methods=['GET', 'POST'])
+def login() -> str:
+    """
+    Handles user login.
+
+    Returns:
+        str: The rendered login page or a redirection to the home page after successful login.
+    """
     if current_user.is_authenticated:
         return redirect(url_for('main.home'))
     form = LoginForm()
@@ -35,17 +47,29 @@ def login():
             return redirect(next_page) if next_page else redirect(url_for('main.home'))
         else:
             flash('Login Unsuccessful. Please check email and password', 'danger')
-    return render_template('login.html',title='Login',form=form)
+    return render_template('login.html', title='Login', form=form)
 
 @users.route("/logout")
-def logout():
+def logout() -> str:
+    """
+    Logs out the current user.
+
+    Returns:
+        str: A redirection to the home page.
+    """
     logout_user()
     flash('You have been logged out!', 'info')
     return redirect(url_for('main.home'))
 
 @users.route("/account", methods=['GET', 'POST'])
 @login_required
-def account():
+def account() -> str:
+    """
+    Handles the user's account update.
+
+    Returns:
+        str: The rendered account page.
+    """
     form = UpdateAccountForm()
     if form.validate_on_submit():
         if form.picture.data:
@@ -63,18 +87,32 @@ def account():
     return render_template('account.html', title='Account',
                            image_file=image_file, form=form)
 
-@users.route("/user/<string:username>" )
-def user_posts(username):
-    page  = request.args.get('page', 1, type=int)
+@users.route("/user/<string:username>")
+def user_posts(username: str) -> str:
+    """
+    Displays posts by a specific user.
+
+    Args:
+        username (str): The username of the user.
+
+    Returns:
+        str: The rendered user posts page.
+    """
+    page = request.args.get('page', 1, type=int)
     user = User.query.filter_by(username=username).first_or_404()
     posts = Post.query.filter_by(author=user)\
         .order_by(Post.date_posted.desc())\
         .paginate(page=page, per_page=3)
     return render_template('user_posts.html', posts=posts, user=user)
 
+@users.route("/reset_password", methods=['GET', 'POST'])
+def reset_request() -> str:
+    """
+    Handles password reset requests.
 
-@users.route("/reset_password", methods=['GET','POST'])
-def reset_request():
+    Returns:
+        str: The rendered password reset request page or a redirection to the login page after sending the reset email.
+    """
     if current_user.is_authenticated:
         return redirect(url_for('main.home'))
     form = RequestResetForm()
@@ -83,11 +121,19 @@ def reset_request():
         send_reset_email(user)
         flash('An email was sent with instructions to reset your password', 'info')
         return redirect(url_for('users.login'))
-
     return render_template('reset_request.html', title='Reset Password', form=form)
 
-@users.route("/reset_password/<token>", methods=['GET','POST'])
-def reset_token(token):
+@users.route("/reset_password/<token>", methods=['GET', 'POST'])
+def reset_token(token: str) -> str:
+    """
+    Handles password reset using a token.
+
+    Args:
+        token (str): The password reset token.
+
+    Returns:
+        str: The rendered password reset page or a redirection if the token is invalid or expired.
+    """
     if current_user.is_authenticated:
         return redirect(url_for('main.home'))
     user = User.verify_reset_token(token)
