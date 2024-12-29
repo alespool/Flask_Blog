@@ -93,7 +93,7 @@ class Post(db.Model):
     date_posted: datetime = db.Column(db.DateTime, nullable=False, default=datetime.now)
     content: str = db.Column(db.Text, nullable=False)
     user_id: int = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    #is_announcements: bool = db.Column(db.Boolean, default=False)
+    is_announcement: bool = db.Column(db.Boolean, default=False)
 
     def excerpt(self, length=200):
         # Return the first 'length' characters of the post content

@@ -24,3 +24,11 @@ def about():
     """
     return render_template('about.html', title='About')
 
+@main.route("/announcements")
+# TODO: Make this function for admins only
+def announcements():
+    """
+    The announcement route renders the announcements.html template with the title 'Announcements'.
+    """
+    announcement_posts = Post.query.filter_by(is_announcement=True).order_by(Post.date_posted.desc()).all()
+    return render_template('announcements.html', recent_posts=announcement_posts)

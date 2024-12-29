@@ -18,7 +18,10 @@ def new_posts():
     """
     form = PostForm()
     if form.validate_on_submit():
-        post = Post(title=form.title.data, content=form.content.data, author=current_user)
+        post = Post(title=form.title.data, 
+                    content=form.content.data, 
+                    is_announcement=form.is_announcement.data,
+                    author=current_user)
         db.session.add(post)
         db.session.commit()
         flash('Your post has been created!', category='success')

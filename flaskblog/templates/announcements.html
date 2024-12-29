@@ -5,40 +5,26 @@
       <br></br>
       <h2 class="section-heading">Announcements</h2>
       <p class="section-subtitle">On this webpage I will post important announcements about knowledge or events related to Bot AI Programming</p>
-      <p class="section-description">This blog is dedicated to sharing insights, experiments, and tutorials on bot AI programming. From classic programming approaches to innovative strategies, I'll delve into how we can push AI systems to their full potential through intelligent code. Whether you're into the history of AI or excited about the future, there's something here for everyone!</p>
     </div>
-	<br></br>
-    <!-- Section 1: What You Can Expect -->
-    <div class="info-section">
-      <h3>What You Can Expect:</h3><br></br>
-      <div class="info-cards">
-        <div class="info-card">
-          <h4>Bot AI Programming Insights</h4>
-          <p>Deep dives into both traditional AI techniques and modern advancements that make bots more intelligent through coding.</p>
-        </div>
-        <div class="info-card">
-          <h4>Case Studies & Tutorials</h4>
-          <p>Practical examples and hands-on guides to building smarter bots, showing you how to apply AI concepts effectively.</p>
-        </div>
-        <div class="info-card">
-          <h4>AI Evolution</h4>
-          <p>A look at how AI technology has evolved, with a focus on programming advancements that have shaped the modern bot landscape.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Section 2: Recent Posts -->
+    <!-- Section 1: Recent Posts -->
     <div class="recent-posts">
       <br></br>
-      <h3>Recent Posts:</h3>
+      <h3>Recent Announcements:</h3>
       <br></br>
-      {% for post in recent_posts %}
-        <div class="post-excerpt">
-          <h4><a href="{{ url_for('posts.post', post_id=post.id, username=post.author.username) }}">{{ post.title }}</a></h4>
-          <p class="post-meta">{{ post.date_posted.strftime('%B %d, %Y') }} - {{ post.author.username }} </p>
-          <p>{{ post.excerpt(200) }}</p> <!-- Show excerpt with 200 characters -->
-        </div>
-      {% endfor %}
+      {% if recent_posts %}
+        {% for post in recent_posts %}
+          <div class="post-excerpt announcement">
+            <h4><a href="{{ url_for('posts.post', post_id=post.id, username=post.author.username) }}">{{ post.title }}</a></h4>
+            <p class="post-meta">{{ post.date_posted.strftime('%B %d, %Y') }} - {{ post.author.username }}</p>
+            <p>{{ post.excerpt(200) }}</p>
+          </div>
+        {% endfor %}
+      {% else %}
+        <p>No announcements have been posted yet. Check back later!</p>
+      {% endif %}
+    </div>
+    <div class="nav-links">
+      <a href="{{ url_for('main.home') }}">All Posts</a>
     </div>
   </div>
 {% endblock content %}
@@ -159,4 +145,24 @@
   a:hover {
     text-decoration: underline;
   }
+  .nav-links {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .nav-links a {
+    color: #4CAF50;
+    margin: 0 10px;
+    text-decoration: none;
+  }
+
+  .nav-links a:hover {
+    text-decoration: underline;
+  }
+
+  .post-excerpt.announcement {
+  background-color: #fff4e5;
+  border-left: 5px solid #FFA500;
+  }
+
 </style>
