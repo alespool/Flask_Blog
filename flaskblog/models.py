@@ -107,3 +107,12 @@ class Post(db.Model):
             str: A string with the post's title and date posted.
         """
         return f"Post('{self.title}', '{self.date_posted}')"
+
+class Event(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(100), nullable=False)
+    start = db.Column(db.DateTime, nullable=False)
+    end = db.Column(db.DateTime, nullable=True)
+
+    def __repr__(self):
+        return f"Event('{self.title}', '{self.start}', '{self.end}')"

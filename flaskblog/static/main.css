@@ -182,3 +182,22 @@ footer a:hover {
   color: #ffcccc;
   text-decoration: underline;
 }
+
+#calendar {
+  max-width: 100%;
+  margin: 20px auto;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.fc-toolbar {
+  background-color: #d80027; /* Adjust to match your theme */
+  color: white;
+}
+
+.fc-event {
+  background-color: #d80027; /* Adjust to match your theme */
+  color: white;
+}

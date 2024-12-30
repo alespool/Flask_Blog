@@ -1,5 +1,5 @@
-from flask import render_template, request, Blueprint
-from flaskblog.models import Post
+from flask import render_template, request, Blueprint, jsonify
+from flaskblog.models import Post, Event
 
 main = Blueprint('main', __name__)
 
@@ -32,3 +32,26 @@ def announcements():
     """
     announcement_posts = Post.query.filter_by(is_announcement=True).order_by(Post.date_posted.desc()).all()
     return render_template('announcements.html', recent_posts=announcement_posts)
+
+@main.route('/calendar')
+def calendar():
+    return render_template('calendar.html')
+
+@main.route('/get-events')
+def get_events():
+    # Query the Event table
+    events = Event.query.all()
+
+    # Format events for FullCalendar
+    events_data = [
+        {
+            "id": event.id,
+            "title": event.title,
+            "start": event.start.isoformat(),
+            "end": event.end.isoformat() if event.end else None,
+        }
+        for event in events
+    ]
+
+    return jsonify(events_data)
+
