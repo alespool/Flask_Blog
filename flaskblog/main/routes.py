@@ -1,5 +1,8 @@
-from flask import render_template, request, Blueprint, jsonify
+from flask import (render_template, url_for, flash,
+                   redirect, request, jsonify, Blueprint)
+from flaskblog import db
 from flaskblog.models import Post, Event
+from datetime import timedelta, datetime
 
 main = Blueprint('main', __name__)
 
@@ -37,21 +40,34 @@ def announcements():
 def calendar():
     return render_template('calendar.html')
 
-@main.route('/get-events')
+@main.route("/get-events")
 def get_events():
-    # Query the Event table
-    events = Event.query.all()
-
-    # Format events for FullCalendar
-    events_data = [
-        {
-            "id": event.id,
-            "title": event.title,
-            "start": event.start.isoformat(),
-            "end": event.end.isoformat() if event.end else None,
+    events = Post.query.filter_by(is_event=True).all()
+    events_data = []
+    
+    for event in events:
+        event_data = {
+            'title': event.title,
+            'start': event.date_posted.isoformat(), 
+            'end': (event.date_posted + timedelta(hours=1)).isoformat(), 
         }
-        for event in events
-    ]
-
+        events_data.append(event_data)
+    
     return jsonify(events_data)
 
+@main.route("/create-recurring-events", methods=['POST'])
+def create_recurring_events():
+    start_time = datetime(2025, 1, 1, 7, 0)  # Start time for the recurring event (e.g., 7 AM)
+    for i in range(30):  # Create events for 30 days
+        event_time = start_time + timedelta(days=i)
+        event = Post(
+            title="Daily Study Session",
+            content="Time for Bot AI Programming!",
+            date_posted=event_time,
+            is_event=True
+        )
+        db.session.add(event)
+    
+    db.session.commit()
+    flash('Recurring study sessions created!', 'success')
+    return redirect(url_for('main.home'))

@@ -9,5 +9,6 @@ class PostForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
     content = PageDownField('Content', validators=[DataRequired()])
     is_announcement = BooleanField('Mark as Announcement')
+    is_event = BooleanField('Mark as Event')
     submit = SubmitField('Post')
     

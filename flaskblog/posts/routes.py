@@ -21,6 +21,7 @@ def new_posts():
         post = Post(title=form.title.data, 
                     content=form.content.data, 
                     is_announcement=form.is_announcement.data,
+                    is_event=form.is_event.data,
                     author=current_user)
         db.session.add(post)
         db.session.commit()
